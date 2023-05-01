@@ -32,7 +32,7 @@ const App: React.FC = () => (
         <Route exact path="/home">
           <Home />
         </Route>
-        <Route exact path="/new">
+        <Route exact path="/login">
           <Login />
         </Route>
         <Route exact path="/">
