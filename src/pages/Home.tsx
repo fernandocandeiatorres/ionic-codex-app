@@ -3,6 +3,7 @@ import {
   IonCheckbox,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -13,12 +14,15 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { person } from "ionicons/icons";
+import { useHistory } from "react-router";
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [todoText, setTodoText] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const history = useHistory();
 
   // Lógica para marcar uma task como completa, ou desmarcar
   // Basicamente qnd vc marca, você adiciona a string "completed" no final
@@ -65,7 +69,14 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Todo List</IonTitle>
+          <IonButton
+            slot="end"
+            className="ion-padding-horizontal"
+            onClick={() => history.push("/login")}
+          >
+            <IonIcon icon={person}></IonIcon>
+          </IonButton>
+          <IonTitle slot="start">Todo List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
