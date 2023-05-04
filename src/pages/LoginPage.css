@@ -1,0 +1,19 @@
+.error {
+    color: red;
+    margin-bottom: 10px;
+  }
+ ion-input {
+  width: 100%;
+  height: 50px;
+} 
+ ion-input::part(native)::-webkit-input-placeholder {
+  /* Centraliza o placeholder verticalmente e horizontalmente */
+  line-height: 50px;
+  text-align: center;
+}
+ 
+ion-button {
+    margin-top: 10px;
+  }
+
+ 

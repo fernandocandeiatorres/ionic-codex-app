@@ -84,7 +84,7 @@ const Home: React.FC = () => {
           >
             <IonIcon icon={person}></IonIcon>
           </IonButton>
-          <IonTitle slot="start">Todo List</IonTitle>
+          <IonTitle slot="start">ToDex</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
                 onIonChange={(e) => handleTodoChange(e, index)}
               />
               <IonButton slot="end" onClick={() => handleEditTodo(index)}>
-                Edit
+                Editar
               </IonButton>
 
 
@@ -111,12 +111,12 @@ const Home: React.FC = () => {
           ))}
           <IonItem>
             <IonButton expand="block" onClick={() => setShowModal(true)}>
-              Add Todo
+              Adicionar Tarefa
             </IonButton>
           </IonItem>
           <IonItem lines="none">
             <IonButton expand="block" onClick={handleClearCompleted}>
-              Clear completed
+              Esvaziar lista de Tarefas
             </IonButton>
           </IonItem>
         </IonList>
@@ -127,13 +127,13 @@ const Home: React.FC = () => {
                 {editingIndex !== null ? "Edit Todo" : "Add Todo"}
               </IonTitle>
               <IonButton slot="end" onClick={() => setShowModal(false)}>
-                Close
+                Fechar
               </IonButton>
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-              <IonLabel position="floating">Todo Text</IonLabel>
+              <IonLabel position="floating"></IonLabel>
               <IonInput
                 value={todoText}
                 onIonInput={(e) => setTodoText(e.detail.value!)}

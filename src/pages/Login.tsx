@@ -50,7 +50,7 @@ const LoginPage: React.FC = () => {
           />
           <IonInput
             type="password"
-            placeholder="Password"
+            placeholder="Senha"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
           />
@@ -61,6 +61,7 @@ const LoginPage: React.FC = () => {
       </IonContent>
     </IonPage>
   );
+
 };
 
 export default LoginPage;
