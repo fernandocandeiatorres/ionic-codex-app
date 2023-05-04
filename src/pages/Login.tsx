@@ -1,42 +1,66 @@
-import {
-  IonBadge,
-  IonCheckbox,
-  IonContent,
-  IonFab,
-  IonFabButton,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonNote,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import { add, home } from "ionicons/icons";
-import { useHistory } from "react-router";
-import ExploreContainer from "../components/ExploreContainer";
-import "./Home.css";
+import React, { useState } from 'react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton } from '@ionic/react';
+import './LoginPage.css';
+import Login from './Login';
 
-const Login: React.FC = () => {
-  const history = useHistory();
+const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Envie as credenciais para o backend
+    const response = await fetch('https://sitedobackend.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    if (response.ok) {
+      // Se o login for bem sucedido, redirecione para a página inicial
+      window.location.href = '/';
+    } else {
+      // Se o login falhar, exiba uma mensagem de erro
+      setErrorMessage('Credenciais inválidas. Tente novamente.');
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Login Page</IonTitle>
+          <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => history.push("/")}>
-            <IonIcon icon={home} />
-          </IonFabButton>
-        </IonFab>
+        <form onSubmit={handleLogin}>
+          {errorMessage && <div className="error">{errorMessage}</div>}
+          <IonInput
+            type="email"
+            placeholder="Email"
+            value={email}
+            onIonChange={(e) => setEmail(e.detail.value!)}
+          />
+          <IonInput
+            type="password"
+            placeholder="Password"
+            value={password}
+            onIonChange={(e) => setPassword(e.detail.value!)}
+          />
+          <IonButton type="submit" expand="block">
+            Login
+          </IonButton>
+        </form>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Login;
+export default LoginPage;

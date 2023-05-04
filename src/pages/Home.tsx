@@ -14,6 +14,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { trash } from "ionicons/icons";
 import { person } from "ionicons/icons";
 import { useHistory } from "react-router";
 
@@ -41,6 +42,13 @@ const Home: React.FC = () => {
   // realizamos uma filtragem a partir disso.
   const handleClearCompleted = () => {
     const newTodos = todos.filter((todo) => !todo.endsWith("(completed)"));
+    setTodos(newTodos);
+  };
+
+  // apaga uma task especifica da lista
+  const handleEraseTodo = (index: number) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
     setTodos(newTodos);
   };
 
@@ -92,6 +100,13 @@ const Home: React.FC = () => {
               <IonButton slot="end" onClick={() => handleEditTodo(index)}>
                 Edit
               </IonButton>
+
+
+
+              <IonButton slot="end" onClick={() => handleEraseTodo(index)}>
+                <IonIcon icon={trash}></IonIcon>
+              </IonButton>
+              
             </IonItem>
           ))}
           <IonItem>
