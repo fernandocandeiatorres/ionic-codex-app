@@ -37,6 +37,7 @@ const LoginPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Login</IonTitle>
+          <IonButton>Home</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
