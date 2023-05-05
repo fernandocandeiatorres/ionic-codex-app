@@ -20,6 +20,7 @@ import { useHistory } from "react-router";
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);
+  const [completos, setCompletos] = useState<string[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [todoText, setTodoText] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -41,8 +42,12 @@ const Home: React.FC = () => {
   // como as tasks completa tem a string "completed" no final da palavra
   // realizamos uma filtragem a partir disso.
   const handleClearCompleted = () => {
+    const oldCompletos = [...completos];
+    const newCompletos = todos.filter((todo) => todo.endsWith("(completed)"));
+    const allCompletos = oldCompletos.concat(newCompletos);
     const newTodos = todos.filter((todo) => !todo.endsWith("(completed)"));
     setTodos(newTodos);
+    setCompletos(allCompletos);
   };
 
   // apaga uma task especifica da lista
@@ -103,7 +108,6 @@ const Home: React.FC = () => {
               <IonButton slot="end" onClick={() => handleEraseTodo(index)}>
                 <IonIcon icon={trash}></IonIcon>
               </IonButton>
-              
             </IonItem>
           ))}
           <IonItem>
@@ -117,6 +121,15 @@ const Home: React.FC = () => {
             </IonButton>
           </IonItem>
         </IonList>
+
+        <IonList>
+          {completos.map((todo, index) => (
+            <IonItem key={index}>
+              <IonLabel>{todo.replace(" (completed)", "")}</IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
+
         <IonModal isOpen={showModal}>
           <IonHeader>
             <IonToolbar>
