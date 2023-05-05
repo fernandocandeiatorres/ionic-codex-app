@@ -5,15 +5,15 @@
  ion-input {
   width: 100%;
   height: 50px;
-} 
- ion-input::part(native)::-webkit-input-placeholder {
-  /* Centraliza o placeholder verticalmente e horizontalmente */
   line-height: 50px;
-  text-align: center;
-}
- 
+  text-align:start;
+  padding-left: 15px;
+  padding-right: 15px;
+} 
+
 ion-button {
     margin-top: 10px;
-  }
-
- 
+    padding-left: 30px;
+    padding-right: 30px;
+    align-items: center;
+}

@@ -100,9 +100,6 @@ const Home: React.FC = () => {
               <IonButton slot="end" onClick={() => handleEditTodo(index)}>
                 Editar
               </IonButton>
-
-
-
               <IonButton slot="end" onClick={() => handleEraseTodo(index)}>
                 <IonIcon icon={trash}></IonIcon>
               </IonButton>

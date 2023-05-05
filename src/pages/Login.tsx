@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton } from '@ionic/react';
 import './LoginPage.css';
 import Login from './Login';
+import { home } from 'ionicons/icons';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Envie as credenciais para o backend
+    // Envie o "token" para o backend
     const response = await fetch('https://sitedobackend.com/login', {
       method: 'POST',
       headers: {
@@ -37,21 +38,26 @@ const LoginPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Login</IonTitle>
-          <IonButton>Home</IonButton>
+          <IonButton routerDirection='back'>Home</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form onSubmit={handleLogin}>
           {errorMessage && <div className="error">{errorMessage}</div>}
+          
           <IonInput
-            type="email"
-            placeholder="Email"
+            label="Email"
+            labelPlacement="floating"
+            fill="solid"
+            placeholder="fulanodetal@gmail.com"
             value={email}
             onIonChange={(e) => setEmail(e.detail.value!)}
           />
           <IonInput
-            type="password"
-            placeholder="Senha"
+            label="Senha"
+            labelPlacement="floating"
+            fill="solid"
+            placeholder="*******"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
           />
