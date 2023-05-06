@@ -17,6 +17,7 @@ import React, { useState } from "react";
 import { trash } from "ionicons/icons";
 import { person } from "ionicons/icons";
 import { useHistory } from "react-router";
+import './Home.css';
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);
@@ -105,7 +106,7 @@ const Home: React.FC = () => {
               <IonButton slot="end" onClick={() => handleEditTodo(index)}>
                 Editar
               </IonButton>
-              <IonButton slot="end" onClick={() => handleEraseTodo(index)}>
+              <IonButton slot="end" fill="solid" onClick={() => handleEraseTodo(index)}>
                 <IonIcon icon={trash}></IonIcon>
               </IonButton>
             </IonItem>
