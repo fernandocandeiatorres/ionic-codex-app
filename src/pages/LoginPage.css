@@ -11,8 +11,14 @@
   padding-right: 15px;
 } 
 
+.item-inner {
+  padding-inline-end: 0px;
+}
+
 ion-button {
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-left:0px;
+    margin-right: 0px;
     padding-left: 5px;
     padding-right: 5px;
     align-items: center;

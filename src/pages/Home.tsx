@@ -15,6 +15,7 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import { trash } from "ionicons/icons";
+import { pencilSharp } from 'ionicons/icons';
 import { person } from "ionicons/icons";
 import { useHistory } from "react-router";
 import './Home.css';
@@ -104,7 +105,7 @@ const Home: React.FC = () => {
                 onIonChange={(e) => handleTodoChange(e, index)}
               />
               <IonButton slot="end" onClick={() => handleEditTodo(index)}>
-                Editar
+                <IonIcon icon={pencilSharp}></IonIcon>
               </IonButton>
               <IonButton slot="end" fill="solid" onClick={() => handleEraseTodo(index)}>
                 <IonIcon icon={trash}></IonIcon>
