@@ -37,14 +37,13 @@ const LoginPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Login</IonTitle>
-          <IonButton routerDirection='back'>Home</IonButton>
+          <IonButton routerLink="/home">Home</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form onSubmit={handleLogin}>
           {errorMessage && <div className="error">{errorMessage}</div>}
-          
+          <IonHeader>Login</IonHeader>
           <IonInput
             label="Email"
             labelPlacement="floating"
