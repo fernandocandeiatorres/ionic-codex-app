@@ -23,7 +23,7 @@ function Example() {
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
           <Route path="/home" render={() => <HomePage />} exact={true} />
-          
+        
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
@@ -42,7 +42,7 @@ function Example() {
   );
 
 }
-export default Example;
+
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
@@ -50,3 +50,5 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+export default Example;

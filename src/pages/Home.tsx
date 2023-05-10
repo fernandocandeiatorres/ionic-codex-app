@@ -79,7 +79,6 @@ const Home: React.FC = () => {
     setEditingIndex(index);
     setShowModal(true);
   };
-
   return (
     
     <IonPage>
