@@ -1,6 +1,30 @@
 # ToDex
 
-# Dependências
+## Equipe Responsável
+
+- Fernando Torres
+- Júlio Alcantara
+- Pedro Henrique
+
+## Funcionalidades Implementadas
+
+[ ] Cadastrar Perfil.
+- Nome Completo;
+- Gênero;
+- Idade;
+- Email;
+- Senha;
+[ ] Entrar no perfil.
+[ ] Editar Perfil
+[X] Adicionar Tarefas.
+- Dia Atual;
+- Dia Futuro;
+[X] Editar Tarefas.
+[X] Excluir Tarefas.
+[X] Concluir Tarefas.
+[X] Visualizar Tarefas Concluídas.
+
+## Dependências
 
 ### Ionic - CLI
 - Instalação 
