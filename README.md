@@ -8,21 +8,21 @@
 
 ## Funcionalidades Implementadas
 
-[ ] Cadastrar Perfil.
+- [ ] Cadastrar Perfil.   
 - Nome Completo;
 - Gênero;
 - Idade;
 - Email;
-- Senha;
-[ ] Entrar no perfil.
-[ ] Editar Perfil
-[X] Adicionar Tarefas.
+- Senha;   
+- [ ] Entrar no perfil.
+- [ ] Editar Perfil
+- [X] Adicionar Tarefas.
 - Dia Atual;
 - Dia Futuro;
-[X] Editar Tarefas.
-[X] Excluir Tarefas.
-[X] Concluir Tarefas.
-[X] Visualizar Tarefas Concluídas.
+- [X] Editar Tarefas.
+- [X] Excluir Tarefas.
+- [X] Concluir Tarefas.
+- [X] Visualizar Tarefas Concluídas.
 
 ## Dependências
 
