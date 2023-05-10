@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton } from '@ionic/react';
 import './LoginPage.css';
-import Login from './Login';
-import { home } from 'ionicons/icons';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +51,7 @@ const LoginPage: React.FC = () => {
             onIonChange={(e) => setEmail(e.detail.value!)}
           />
           <IonInput
+            type='password'
             label="Senha"
             labelPlacement="floating"
             fill="solid"
