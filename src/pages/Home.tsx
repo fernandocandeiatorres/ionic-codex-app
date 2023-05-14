@@ -12,11 +12,10 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-} from "@ionic/react";
+}
+  from "@ionic/react";
 import React, { useState } from "react";
-import { trash } from "ionicons/icons";
-import { pencilSharp } from 'ionicons/icons';
-import { person } from "ionicons/icons";
+import { trash, person, pencilSharp, closeSharp } from "ionicons/icons";
 import { useHistory } from "react-router";
 import './Home.css';
 
@@ -79,8 +78,9 @@ const Home: React.FC = () => {
     setEditingIndex(index);
     setShowModal(true);
   };
+
   return (
-    
+
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonList>
+        <IonList lines="full">
           {todos.map((todo, index) => (
             <IonItem key={index}>
               <IonLabel>{todo.replace(" (completed)", "")}</IonLabel>
@@ -119,12 +119,12 @@ const Home: React.FC = () => {
           </IonItem>
           <IonItem lines="none">
             <IonButton expand="block" onClick={handleClearCompleted}>
-              Esvaziar lista de Tarefas
+              Limpar Tarefas Completas
             </IonButton>
           </IonItem>
-        </IonList>
+        </IonList >
 
-        <IonList>
+        <IonList lines="full">
           {completos.map((todo, index) => (
             <IonItem key={index}>
               <IonLabel>{todo.replace(" (completed)", "")}</IonLabel>
@@ -139,7 +139,7 @@ const Home: React.FC = () => {
                 {editingIndex !== null ? "Edit Todo" : "Add Todo"}
               </IonTitle>
               <IonButton slot="end" onClick={() => setShowModal(false)}>
-                Fechar
+                <IonIcon icon={closeSharp}></IonIcon>
               </IonButton>
             </IonToolbar>
           </IonHeader>

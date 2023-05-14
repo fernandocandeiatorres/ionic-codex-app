@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonIcon } from '@ionic/react';
+import { homeSharp } from "ionicons/icons";
 import './LoginPage.css';
 
 const LoginPage: React.FC = () => {
@@ -35,13 +36,15 @@ const LoginPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButton routerLink="/home">Home</IonButton>
+          <IonButton routerLink="/home">
+            <IonIcon icon={homeSharp}></IonIcon>
+          </IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form onSubmit={handleLogin}>
           {errorMessage && <div className="error">{errorMessage}</div>}
-          <IonHeader>Login</IonHeader>
+          <IonHeader><h2>LOGIN</h2></IonHeader>
           <IonInput
             label="Email"
             labelPlacement="floating"
