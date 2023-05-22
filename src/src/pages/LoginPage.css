@@ -1,0 +1,24 @@
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+ion-input {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: start;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+ion-button {
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+}
