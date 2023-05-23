@@ -14,6 +14,14 @@ export default class PerfilsController {
 
     public async store({ request, response }: HttpContextContract) {
         const body = request.body()
+        const email = body.email;
+
+        const perfilExists = await Perfil.findBy('email', email);
+        if (perfilExists) {
+            return response.status(400).json({
+                message: 'Erro ao criar usuário',
+              });
+        }
 
         const image = request.file('image', this.validationOptions)
 

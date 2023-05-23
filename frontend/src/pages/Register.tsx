@@ -15,6 +15,7 @@ const Register: React.FC = () => {
 
 
   const handleRegister = () => {
+    
     // Dados para criar uma conta
     const accountData: any = {
       nome: nome,
@@ -26,6 +27,7 @@ const Register: React.FC = () => {
     };
     // Faça a chamada de API para obter a lista de usuários
     axios.post(`${backendUrl}/perfils`, accountData).then((response: any) => {
+      
     // Processar a resposta recebida do backend
     const account: any = response.data;
     console.log(account); // Exemplo de manipulação dos dados recebidos
