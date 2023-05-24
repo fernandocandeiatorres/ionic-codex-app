@@ -18,7 +18,6 @@ import React, { useState } from "react";
 import { trash, person, pencilSharp, closeSharp } from "ionicons/icons";
 import { useHistory } from "react-router";
 import './Home.css';
-import axios from "axios";
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);

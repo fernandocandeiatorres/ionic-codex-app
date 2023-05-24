@@ -1,21 +1,22 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/react';
 import React, { useState } from 'react';
 import axios from "axios";
+import './Register.css'
 
 // Falta implementar o restante além de email e senha
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [senha, setPassword] = useState('');
   const [nome, setNome] = useState('');
- // seria interessante uma caixa de seleção para o gênero 
+  // seria interessante uma caixa de seleção para o gênero 
   const [genero, setGenero] = useState('');
   const [idade, setIdade] = useState('');
   const [imagem, setImage] = useState('');
-  const backendUrl: string = 'http://127.0.0.1:3333/api';
+  const backendUrl = 'http://127.0.0.1:3333/api';
 
 
   const handleRegister = () => {
-    
+
     // Dados para criar uma conta
     const accountData: any = {
       nome: nome,
@@ -27,15 +28,15 @@ const Register: React.FC = () => {
     };
     // Faça a chamada de API para obter a lista de usuários
     axios.post(`${backendUrl}/perfils`, accountData).then((response: any) => {
-      
-    // Processar a resposta recebida do backend
-    const account: any = response.data;
-    console.log(account); // Exemplo de manipulação dos dados recebidos
-  }).catch((error: any) => {
-    // Lidar com erros na chamada de API
-    console.error(error);
-  });
-  
+
+      // Processar a resposta recebida do backend
+      const account: any = response.data;
+      console.log(account); // Exemplo de manipulação dos dados recebidos
+    }).catch((error: any) => {
+      // Lidar com erros na chamada de API
+      console.error(error);
+    });
+
   };
 
 

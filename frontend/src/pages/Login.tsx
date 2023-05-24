@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonIcon } from '@ionic/react';
 import { homeSharp } from "ionicons/icons";
+import { useHistory } from "react-router";
+import axios from "axios";
+
 import './LoginPage.css';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const history = useHistory();
+  const backendUrl = 'http://127.0.0.1:3333/api';
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    // Envie o "token" para o backend
-    const response = await fetch('https://sitedobackend.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    try {
+      const response = await axios.post(`${backendUrl}/login`, { email, password });
 
-    if (response.ok) {
-      // Se o login for bem sucedido, redirecione para a página inicial
+      // Lógica para tratar a resposta do backend após o login bem-sucedido
+      console.log(response.data);
       window.location.href = '/';
-    } else {
-      // Se o login falhar, exiba uma mensagem de erro
-      setErrorMessage('Credenciais inválidas. Tente novamente.');
-    }
+    } catch (error) {
+      // Lógica para tratar o erro de login
+      console.error(error);
+    };
+      
   };
 
   return (
@@ -65,7 +62,13 @@ const LoginPage: React.FC = () => {
           <IonButton type="submit" expand="block">
             Login
           </IonButton>
+          <IonButton slot="end"
+            onClick={() => history.push("/register")}
+            expand="block">
+            Cadastrar Conta
+          </IonButton>
         </form>
+        
       </IonContent>
     </IonPage>
   );
