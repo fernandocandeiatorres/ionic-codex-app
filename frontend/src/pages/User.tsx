@@ -11,6 +11,8 @@ import {
 } from '@ionic/react';
 import { arrowBack, call, pencil } from 'ionicons/icons';
 // Ainda não consegui adicionar essa tela de usuario, mas comecei a implementar já
+
+
 const UserPage = () => {
   return (
     <>
