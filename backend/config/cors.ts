@@ -20,10 +20,10 @@ const corsConfig: CorsConfig = {
   | you can define a function to enable/disable it on per request basis as well.
   |
   */
-  enabled: (request) => request.url().startsWith('/api'),
+  enabled: true,
 
   // You can also use a function that return true or false.
-  // enabled: 
+  // enabled: (request) => request.url().startsWith('/api')
 
   /*
   |--------------------------------------------------------------------------
