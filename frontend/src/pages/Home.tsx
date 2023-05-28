@@ -27,7 +27,14 @@ const Home: React.FC = () => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const history = useHistory();
 
-
+  const isLoged = () =>{
+    if(localStorage.getItem('token')){
+      return true
+    }
+    else{
+      return false
+    }
+  }
   // Lógica para marcar uma task como completa, ou desmarcar
   // Basicamente qnd vc marca, você adiciona a string "completed" no final
   // da palavra
@@ -74,6 +81,15 @@ const Home: React.FC = () => {
     }
   };
 
+  const direcionar = ()=>{
+    if(isLoged()){
+      history.push("/user")
+    }
+    else{
+      history.push("/login")
+    }
+  }
+
   const handleEditTodo = (index: number) => {
     setTodoText(todos[index].replace(" (completed)", ""));
     setEditingIndex(index);
@@ -88,7 +104,7 @@ const Home: React.FC = () => {
           <IonButton
             slot="end"
             className="ion-padding-horizontal"
-            onClick={() => history.push("/login")}
+            onClick={() => direcionar()}
           >
             <IonIcon icon={person}></IonIcon>
           </IonButton>

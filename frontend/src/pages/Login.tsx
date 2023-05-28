@@ -16,18 +16,24 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    axios.post('http://localhost:3333/api/login', formData).then((response) => {
+        console.log(response.data);
+        const token = response.data;
+        localStorage.setItem('token', token);
+        history.push("/home");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
       
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButton routerLink="/home">
-            <IonIcon icon={homeSharp}></IonIcon>
-          </IonButton>
-        </IonToolbar>
       </IonHeader>
       <IonContent>
         <form onSubmit={handleLogin}>
@@ -59,7 +65,6 @@ const LoginPage: React.FC = () => {
             Cadastrar Conta
           </IonButton>
         </form>
-        
       </IonContent>
     </IonPage>
   );

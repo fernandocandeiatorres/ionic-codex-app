@@ -70,10 +70,28 @@ export default class AuthController {
         }
       }
       const token = jwt.sign(email, password);
+      
       return {
-        success: true,
-        message: 'Login realizado com sucesso.',
         token,
       }
+  }
+  public async dadosUsuario({ auth, response }: HttpContextContract) {
+    try {
+      // Obtém o usuário autenticado a partir do token
+      const user = auth.user!
+      // Retorna os dados do usuário
+      return response.json({
+        email: user.email,
+        age: user.age,
+        name: user.name,
+        gender: user.gender,
+        image: user.image,
+      })
+    } catch (error) {
+      // Trata os erros da requisição
+      return response.status(500).json({
+        message: 'Erro ao obter os dados do usuário',
+      })
+    }
   }
 }
