@@ -1,7 +1,8 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonIcon } from '@ionic/react';
 import React, { useState } from 'react';
 import axios from "axios";
 import './Register.css'
+import { homeSharp } from 'ionicons/icons';
 
 // Falta implementar o restante além de email e senha
 const Register: React.FC = () => {
@@ -43,6 +44,11 @@ const Register: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
+      <IonToolbar>
+          <IonButton routerLink="/home">
+            <IonIcon icon={homeSharp}></IonIcon>
+          </IonButton>
+        </IonToolbar>
         <IonToolbar>
           <IonTitle>Registrar</IonTitle>
         </IonToolbar>
