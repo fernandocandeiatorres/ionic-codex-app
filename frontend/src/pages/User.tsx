@@ -60,6 +60,7 @@ const UserPage = () => {
 
   const sair = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
     history.push("/login");
   }
 
@@ -71,7 +72,7 @@ const UserPage = () => {
             <IonIcon icon={arrowBack} onClick={() => history.push("/home")} />
           </IonButton>
           <IonTitle>Perfil</IonTitle>
-          <IonButton slot="end">
+          <IonButton slot="end" routerLink="/edit">
             <IonIcon icon={pencil} />
           </IonButton>
         </IonToolbar>
@@ -81,7 +82,7 @@ const UserPage = () => {
         <div className="ion-padding">
           <IonItem>
             <IonAvatar slot="start">
-              <img  src="C:\Users\andre\Documents\GitHub\ionic-codex-app\backend\tmp\uploads\92e5b3c7-ac17-4ccf-a32a-b97e6ded10f8.jpg" alt="User avatar" />
+              <img src="C:/Users/andre/Documents/GitHub/ionic-codex-app/backend/tmp/uploads/92e5b3c7-ac17-4ccf-a32a-b97e6ded10f8.jpg" alt="User avatar" />
             </IonAvatar>
             <IonLabel>
               <h2 id="name">name</h2>

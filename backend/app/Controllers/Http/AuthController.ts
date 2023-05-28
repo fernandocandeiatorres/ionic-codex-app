@@ -52,7 +52,6 @@ export default class AuthController {
   public async login({ request }: HttpContextContract) {
     const { email, password } = request.all()
   
-    // Verifica se o usuário existe no banco de dados
     const user = await User.findBy('email', email)
     if (!user) {
       return {
@@ -61,7 +60,6 @@ export default class AuthController {
       }
     }
   
-    // Verifica se a senha fornecida é válida
     const passwordValid = await Hash.verify(user.password, password)
     if (!passwordValid) {
       return {
@@ -70,7 +68,6 @@ export default class AuthController {
       }
     }
   
-    // Gere o token JWT
     const token = jwt.sign({ email, id: user.id }, 'your-secret-key')
     
     return {

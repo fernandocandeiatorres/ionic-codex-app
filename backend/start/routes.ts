@@ -19,16 +19,13 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import Helpers from '@adonisjs/core/build/standalone';
+
 
 Route.post('/api/register', 'AuthController.register')
 Route.patch('/api/users/:id', 'AuthController.update')
 Route.post('/api/login', 'AuthController.login')
 Route.get('/api/users/:id', 'AuthController.getUserById')
-Route.get('/images/:filename', async ({ response, params }) => {
-  const filename = params.filename;
-  return response.download(Helpers.tmpPath(`uploads/${filename}`));
-});
+
 
 Route.get('/api/', async () => {
   return { hello: 'world' }

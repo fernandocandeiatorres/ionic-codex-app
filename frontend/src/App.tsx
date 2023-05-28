@@ -24,6 +24,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import Register from "./pages/Register";
 import UserPage from "./pages/User";
+import Edit from "./pages/Edit";
 
 setupIonicReact();
 
@@ -42,6 +43,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/user">
           <UserPage />
+        </Route>
+        <Route exact path="/edit">
+          <Edit />
         </Route>
         <Route exact path="/">
           <Redirect to="/login" />

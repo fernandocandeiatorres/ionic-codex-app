@@ -1,75 +1,71 @@
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonIcon } from '@ionic/react';
 import React, { useState } from 'react';
-import { IonInput, IonButton, IonSelect, IonSelectOption } from '@ionic/react';
-import axios from 'axios';
+import axios from "axios";
+import './Register.css'
+import { homeSharp } from 'ionicons/icons';
+import { useHistory } from "react-router";
 
-const RegisterForm: React.FC = () => {
-  const [name, setName] = useState('');
+// Falta implementar o restante além de email e senha
+const Register: React.FC = () => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [gender, setGender] = useState('');
-  const [image, setImage] = useState<File | null>(null);
-  const [age, setAge] = useState('');
+  const [senha, setPassword] = useState('');
+  const [nome, setNome] = useState('');
+  // seria interessante uma caixa de seleção para o gênero 
+  const [genero, setGenero] = useState('');
+  const [idade, setIdade] = useState('');
+  const [imagem, setImage] = useState('');
+  const backendUrl = 'http://127.0.0.1:3333/api';
+
 
   const handleRegister = () => {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('gender', gender);
-    formData.append('image', image!);
-    formData.append('age', age);
 
-    axios.post('http://localhost:3333/api/register', formData).then((response) => {
-        console.log(response.data);
-        // Faça algo com a resposta da API, como redirecionar para a página de perfil ou exibir uma mensagem de sucesso
-      })
-      .catch((error) => {
-        console.error(error);
-        // Trate o erro, exiba uma mensagem de erro ou execute outra lógica adequada
-      });
-  };
+    // Dados para criar uma conta
+    const accountData: any = {
+      name: nome,
+      email: email,
+      password: senha,
+      age: idade,
+      gender: genero,
+      image: ''
+    };
+    // Faça a chamada de API para obter a lista de usuários
+    axios.post(`${backendUrl}/register`, accountData).then((response: any) => {
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
-    }
+      // Processar a resposta recebida do backend
+      const account: any = response.data;
+      console.log(account); // Exemplo de manipulação dos dados recebidos
+      history.push("/login");
+    }).catch((error: any) => {
+      // Lidar com erros na chamada de API
+      console.error(error);
+    });
+
   };
 
 
   return (
-    <form>
-      <IonInput
-        placeholder="Nome"
-        value={name}
-        onIonChange={(e) => setName(e.detail.value!)}
-      />
-      <IonInput
-        placeholder="Email"
-        value={email}
-        onIonChange={(e) => setEmail(e.detail.value!)}
-      />
-      <IonInput
-        placeholder="Password"
-        value={password}
-        type="password"
-        onIonChange={(e) => setPassword(e.detail.value!)}
-      />
-      <IonInput
-        placeholder="Gender"
-        value={gender}
-        onIonChange={(e) => setGender(e.detail.value!)}
-      />
-      <IonInput
-        placeholder="Age"
-        value={age}
-        type="number"
-        onIonChange={(e) => setAge(e.detail.value!)}
-      />
-      <IonButton expand="full" onClick={handleRegister}>
-        Criar Conta
-      </IonButton>
-    </form>
+    <IonPage>
+      <IonHeader>
+      <IonToolbar>
+          <IonButton routerLink="/home">
+            <IonIcon icon={homeSharp}></IonIcon>
+          </IonButton>
+        </IonToolbar>
+        <IonToolbar>
+          <IonTitle>Registrar</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonInput type="email" placeholder="Email" value={email} onIonChange={(e: any) => setEmail(e.target.value)} />
+        <IonInput type="password" placeholder="Senha" value={senha} onIonChange={(e: any) => setPassword(e.target.value)} />
+        <IonInput type="text" placeholder="Nome" value={nome} onIonChange={(e: any) => setNome(e.target.value)} />
+        <IonInput type="text" placeholder="Genero" value={genero} onIonChange={(e: any) => setGenero(e.target.value)} />
+        <IonInput type="number" placeholder="Idade" value={idade} onIonChange={(e: any) => setIdade(e.target.value)} />
+        <IonButton expand="block" onClick={() => handleRegister()}>Registrar</IonButton>
+      </IonContent>
+    </IonPage>
   );
 };
 
-export default RegisterForm;
+export default Register;
