@@ -15,17 +15,8 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post(`${backendUrl}/login`, { email, password })
-
-      // Lógica para tratar a resposta do backend após o login bem-sucedido
-      console.log(response.data);
-      window.location.href = '/';
-    } catch (error) {
-      // Lógica para tratar o erro de login
-      console.error(error);
-    };
+    
+    
       
   };
 

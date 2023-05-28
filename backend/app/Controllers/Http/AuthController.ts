@@ -1,6 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import Hash from '@ioc:Adonis/Core/Hash'
 import {v4 as uuidv4} from 'uuid'
+import jwt from 'jsonwebtoken';
 import Application  from '@ioc:Adonis/Core/Application'
 
 export default class AuthController {
@@ -46,5 +48,32 @@ export default class AuthController {
     } catch (error) {
       return response.status(500).json({ message: 'Erro ao atualizar a conta' })
     }
+  }
+  public async login({ request }: HttpContextContract){
+    const { email, password } = request.all()
+
+      // Verifica se o usuário existe no banco de dados
+      const user = await User.findBy('email', email)
+      if (!user) {
+        return {
+          success: false,
+          message: 'Usuário não encontrado.',
+        }
+      }
+
+      // Verifica se a senha fornecida é válida
+      const passwordValid = await Hash.verify(user.password, password)
+      if (!passwordValid) {
+        return {
+          success: false,
+          message: 'Senha incorreta.',
+        }
+      }
+      const token = jwt.sign(email, password);
+      return {
+        success: true,
+        message: 'Login realizado com sucesso.',
+        token,
+      }
   }
 }

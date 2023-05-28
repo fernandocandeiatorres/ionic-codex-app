@@ -22,6 +22,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/api/register', 'AuthController.register')
 Route.patch('/api/users/:id', 'AuthController.update')
+Route.post('/api/login', 'AuthController.login')
 
 Route.get('/api/', async () => {
   return { hello: 'world' }
