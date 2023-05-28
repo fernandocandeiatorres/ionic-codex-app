@@ -19,10 +19,12 @@ const LoginPage: React.FC = () => {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    axios.post('http://localhost:3333/api/login', formData).then((response) => {
-        console.log(response.data);
-        const token = response.data;
+    axios.post('http://localhost:3333/api/login', formData)
+      .then((response) => {
+        const { token, id } = response.data;
+        console.log(response.data)
         localStorage.setItem('token', token);
+        localStorage.setItem('id', id);
         history.push("/home");
       })
       .catch((error) => {

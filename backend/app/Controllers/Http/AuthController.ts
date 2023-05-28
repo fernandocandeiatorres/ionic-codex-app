@@ -49,49 +49,66 @@ export default class AuthController {
       return response.status(500).json({ message: 'Erro ao atualizar a conta' })
     }
   }
-  public async login({ request }: HttpContextContract){
+  public async login({ request }: HttpContextContract) {
     const { email, password } = request.all()
-
-      // Verifica se o usuário existe no banco de dados
-      const user = await User.findBy('email', email)
-      if (!user) {
-        return {
-          success: false,
-          message: 'Usuário não encontrado.',
-        }
-      }
-
-      // Verifica se a senha fornecida é válida
-      const passwordValid = await Hash.verify(user.password, password)
-      if (!passwordValid) {
-        return {
-          success: false,
-          message: 'Senha incorreta.',
-        }
-      }
-      const token = jwt.sign(email, password);
-      
+  
+    // Verifica se o usuário existe no banco de dados
+    const user = await User.findBy('email', email)
+    if (!user) {
       return {
-        token,
+        success: false,
+        message: 'Usuário não encontrado.',
       }
-  }
-  public async dadosUsuario({ auth, response }: HttpContextContract) {
-    try {
-      // Obtém o usuário autenticado a partir do token
-      const user = auth.user!
-      // Retorna os dados do usuário
-      return response.json({
-        email: user.email,
-        age: user.age,
-        name: user.name,
-        gender: user.gender,
-        image: user.image,
-      })
-    } catch (error) {
-      // Trata os erros da requisição
-      return response.status(500).json({
-        message: 'Erro ao obter os dados do usuário',
-      })
+    }
+  
+    // Verifica se a senha fornecida é válida
+    const passwordValid = await Hash.verify(user.password, password)
+    if (!passwordValid) {
+      return {
+        success: false,
+        message: 'Senha incorreta.',
+      }
+    }
+  
+    // Gere o token JWT
+    const token = jwt.sign({ email, id: user.id }, 'your-secret-key')
+    
+    return {
+      token,
+      id: user.id,
     }
   }
+  public async getUserById({ params, response }: HttpContextContract) {
+    try {
+      const { id } = params;
+  
+      // Busca o usuário pelo ID
+      const user = await User.find(id);
+      if (!user) {
+        return response.status(404).json({
+          success: false,
+          message: 'Usuário não encontrado.',
+        });
+      }
+      
+      // Retorna os dados do usuário
+      return response.json({
+        success: true,
+        user: {
+          email: user.email,
+          name: user.name,
+          age: user.age,
+          gender: user.gender,
+          image: user.image
+          // Outros dados do usuário que você queira retornar
+        },
+      });
+    } catch (error) {
+      return response.status(500).json({
+        success: false,
+        message: 'Erro ao buscar usuário.',
+      });
+    }
+  }
+  
 }

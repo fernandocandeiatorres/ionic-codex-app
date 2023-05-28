@@ -12,26 +12,23 @@ import {
 import { arrowBack, call, pencil } from 'ionicons/icons';
 import { useHistory } from "react-router";
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const UserPage = () => {
   const history = useHistory();
-  const token = localStorage.getItem('token');
+  const id = localStorage.getItem('id');
+  let Image: string | "" = "";
 
-  const pegarDados = () => {
-    axios.get('http://localhost:3333/api/dados-usuario', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+  useEffect(() => {
+    axios.get(`http://localhost:3333/api/users/${id}`)
       .then(response => {
-        const { email, age, name, gender, image } = response.data;
-
+        const { email, age, name, gender, image } = response.data.user;
         // Atualize os elementos da página com os dados obtidos
         const nameElement = document.getElementById('name');
         if (nameElement) {
           nameElement.innerText = name;
         }
-
+        
         const emailElement = document.getElementById('email');
         if (emailElement) {
           emailElement.innerText = email;
@@ -46,11 +43,20 @@ const UserPage = () => {
         if (ageElement) {
           ageElement.innerText = age;
         }
+        
+        const imageElement = document.getElementById('image');
+        if (imageElement) {
+          Image = "./ionic-codex-app/backend/tmp/uploads/" + image;
+          imageElement.setAttribute("src", Image);
+        }
+        
+        console.log(imageElement, Image)
       })
       .catch(error => {
         // Trate os erros da requisição
       });
-  }
+  }, []);
+
 
   const sair = () => {
     localStorage.removeItem('token');
@@ -62,8 +68,7 @@ const UserPage = () => {
       <IonHeader>
         <IonToolbar>
           <IonButton slot="start">
-            <IonIcon icon={arrowBack}
-            onClick={() => history.push("/home")} />
+            <IonIcon icon={arrowBack} onClick={() => history.push("/home")} />
           </IonButton>
           <IonTitle>Perfil</IonTitle>
           <IonButton slot="end">
@@ -76,7 +81,7 @@ const UserPage = () => {
         <div className="ion-padding">
           <IonItem>
             <IonAvatar slot="start">
-              <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="User avatar" />
+              <img  src="C:\Users\andre\Documents\GitHub\ionic-codex-app\backend\tmp\uploads\92e5b3c7-ac17-4ccf-a32a-b97e6ded10f8.jpg" alt="User avatar" />
             </IonAvatar>
             <IonLabel>
               <h2 id="name">name</h2>
@@ -87,16 +92,8 @@ const UserPage = () => {
             <IonLabel id="gender">gender</IonLabel>
             <IonLabel id="age">age</IonLabel>
           </IonItem>
-          <IonButton slot="end"
-            expand="block"
-            className="ion-padding-horizontal"
-            onClick={() => sair()}>Logout</IonButton>
-            <IonButton slot="end"
-            expand="block"
-            className="ion-padding-horizontal"
-            onClick={() => pegarDados()}>DADOS</IonButton>
+          <IonButton slot="end" expand="block" className="ion-padding-horizontal" onClick={() => sair()}>Logout</IonButton>
         </div>
-        
       </IonContent>
     </>
   );
