@@ -50,7 +50,6 @@ const UserPage = () => {
           imageElement.setAttribute("src", Image);
         }
         
-        console.log(imageElement, Image)
       })
       .catch(error => {
         // Trate os erros da requisição
@@ -68,8 +67,8 @@ const UserPage = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonButton slot="start">
-            <IonIcon icon={arrowBack} onClick={() => history.push("/home")} />
+          <IonButton slot="start" onClick={() => history.push("/home")}>
+            <IonIcon icon={arrowBack}  />
           </IonButton>
           <IonTitle>Perfil</IonTitle>
           <IonButton slot="end" routerLink="/edit">
@@ -82,7 +81,7 @@ const UserPage = () => {
         <div className="ion-padding">
           <IonItem>
             <IonAvatar slot="start">
-              <img src="C:/Users/andre/Documents/GitHub/ionic-codex-app/backend/tmp/uploads/92e5b3c7-ac17-4ccf-a32a-b97e6ded10f8.jpg" alt="User avatar" />
+              <img src={Image} alt="User avatar" />
             </IonAvatar>
             <IonLabel>
               <h2 id="name">name</h2>
