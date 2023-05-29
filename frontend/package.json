@@ -12,8 +12,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor/android": "^5.0.4",
     "@capacitor/app": "4.1.1",
-    "@capacitor/core": "4.8.0",
+    "@capacitor/core": "^4.8.0",
     "@capacitor/haptics": "4.1.0",
     "@capacitor/keyboard": "4.1.1",
     "@capacitor/status-bar": "4.1.1",
@@ -29,7 +30,7 @@
     "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
-    "@capacitor/cli": "4.8.0",
+    "@capacitor/cli": "^4.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
