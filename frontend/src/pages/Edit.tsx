@@ -34,13 +34,11 @@ const Edit: React.FC = () => {
         if (gender !== '') {
           accountData.gender = gender;
         }
-        
         accountData.image = image;
-      axios.patch(`http://localhost:3333/api/users/${id}`, accountData).then((response: any) => {
+        axios.patch(`http://localhost:3333/api/users/${id}`, accountData).then((response: any) => {
   
         const account: any = response.data;
         console.log(account);
-        history.push("/user");
       }).catch((error: any) => {
         console.error(error);
       });

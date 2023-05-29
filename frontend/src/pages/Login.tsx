@@ -27,9 +27,6 @@ const LoginPage: React.FC = () => {
         localStorage.setItem('id', id);
         history.push("/home");
       })
-      .catch((error) => {
-        console.error(error);
-      });
       
   };
 

@@ -43,7 +43,7 @@ export default class AuthController{
       const data = request.only(['name', 'email', 'password', 'gender', 'image', 'age', 'todos', 'completos', 'todos', 'completos'])
   
       const user = await User.findOrFail(userId)
-      user.merge(data)
+      await user.merge(data)
       await user.save()
   
       return user

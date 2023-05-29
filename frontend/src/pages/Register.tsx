@@ -27,7 +27,9 @@ const Register: React.FC = () => {
       password: senha,
       age: idade,
       gender: genero,
-      image: ''
+      image: '',
+      todos: "",
+      completos:""
     };
     // Faça a chamada de API para obter a lista de usuários
     axios.post(`${backendUrl}/register`, accountData).then((response: any) => {
@@ -48,7 +50,7 @@ const Register: React.FC = () => {
     <IonPage>
       <IonHeader>
       <IonToolbar>
-          <IonButton routerLink="/home">
+          <IonButton routerLink="/login">
             <IonIcon icon={homeSharp}></IonIcon>
           </IonButton>
         </IonToolbar>

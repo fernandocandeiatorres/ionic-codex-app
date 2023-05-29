@@ -51,9 +51,6 @@ const UserPage = () => {
         }
         
       })
-      .catch(error => {
-        // Trate os erros da requisição
-      });
   }, []);
 
 
