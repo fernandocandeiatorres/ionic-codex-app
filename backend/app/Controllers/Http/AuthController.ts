@@ -5,7 +5,7 @@ import {v4 as uuidv4} from 'uuid'
 import jwt from 'jsonwebtoken';
 import Application  from '@ioc:Adonis/Core/Application'
 
-export default class AuthController {
+export default class AuthController{
   private validation= {
     types:["images"],
     size: "20mb"
@@ -14,6 +14,8 @@ export default class AuthController {
     try {
       // Recupera os dados enviados pelo cliente
       const data = request.body()
+      data.todos = ""
+      data.completos = ""
 
       const image = request.file('image',this.validation)
 
@@ -38,7 +40,7 @@ export default class AuthController {
   public async update({ params, request, response }: HttpContextContract) {
     try {
       const userId = params.id
-      const data = request.only(['name', 'email', 'password', 'gender', 'image', 'age'])
+      const data = request.only(['name', 'email', 'password', 'gender', 'image', 'age', 'todos', 'completos', 'todos', 'completos'])
   
       const user = await User.findOrFail(userId)
       user.merge(data)
@@ -87,8 +89,7 @@ export default class AuthController {
           message: 'Usuário não encontrado.',
         });
       }
-      
-      // Retorna os dados do usuário
+  
       return response.json({
         success: true,
         user: {
@@ -96,16 +97,20 @@ export default class AuthController {
           name: user.name,
           age: user.age,
           gender: user.gender,
-          image: user.image
-          // Outros dados do usuário que você queira retornar
+          image: user.image,
+          todos: user.todos,
+          completos: user.completos
         },
       });
+      
     } catch (error) {
       return response.status(500).json({
         success: false,
         message: 'Erro ao buscar usuário.',
+        error: error
       });
     }
   }
+  
   
 }

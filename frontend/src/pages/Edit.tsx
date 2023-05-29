@@ -38,12 +38,10 @@ const Edit: React.FC = () => {
         accountData.image = image;
       axios.patch(`http://localhost:3333/api/users/${id}`, accountData).then((response: any) => {
   
-        // Processar a resposta recebida do backend
         const account: any = response.data;
         console.log(account);
         history.push("/user");
       }).catch((error: any) => {
-        // Lidar com erros na chamada de API
         console.error(error);
       });
   

@@ -18,6 +18,10 @@ import React, { useState } from "react";
 import { trash, person, pencilSharp, closeSharp } from "ionicons/icons";
 import { useHistory } from "react-router";
 import './Home.css';
+import axios from "axios";
+import { useEffect } from 'react';
+
+
 
 const Home: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);
@@ -25,7 +29,43 @@ const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [todoText, setTodoText] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const id = localStorage.getItem('id');
   const history = useHistory();
+
+  useEffect(() => {
+    axios.get(`http://localhost:3333/api/users/${id}`)
+      .then(response => {
+        const Todos = response.data.user.todos;
+        const Completos = response.data.user.completos;
+        if (Todos) {
+          setTodos(Todos.split('-?!$%'));
+        } else {
+          setTodos([]);
+        }
+        if(Completos) {
+          setCompletos(Completos.split('-?!$%'));
+        } else {
+          setCompletos([]);
+        }
+      })
+  }, []);
+
+  const atualizar = () => {
+    const todosString = todos.join('-?!$%');
+    const completosString = completos.join('-?!$%');
+    const accountData: any = {
+      todos: todosString,
+      completos: completosString
+    };
+    
+    axios.patch(`http://localhost:3333/api/users/${id}`, accountData).then((response: any) => {
+      const account: any = response.data;
+      console.log(account);
+    }).catch((error: any) => {
+      console.error(error);
+    });
+
+  };
 
   const isLoged = () =>{
     if(localStorage.getItem('token')){
@@ -46,6 +86,7 @@ const Home: React.FC = () => {
       newTodos[index] = todos[index].replace(" (completed)", "");
     }
     setTodos(newTodos);
+    atualizar();
   };
 
   // como as tasks completa tem a string "completed" no final da palavra
@@ -57,6 +98,7 @@ const Home: React.FC = () => {
     const newTodos = todos.filter((todo) => !todo.endsWith("(completed)"));
     setTodos(newTodos);
     setCompletos(allCompletos);
+    atualizar();
   };
 
   // apaga uma task especifica da lista
@@ -64,6 +106,7 @@ const Home: React.FC = () => {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
     setTodos(newTodos);
+    atualizar();
   };
 
   const handleAddTodo = () => {
@@ -78,10 +121,12 @@ const Home: React.FC = () => {
       setTodos(newTodos);
       setTodoText("");
       setShowModal(false);
+      atualizar();
     }
   };
 
   const direcionar = ()=>{
+    atualizar();
     if(isLoged()){
       history.push("/user")
     }
@@ -94,6 +139,7 @@ const Home: React.FC = () => {
     setTodoText(todos[index].replace(" (completed)", ""));
     setEditingIndex(index);
     setShowModal(true);
+    atualizar();
   };
 
   return (
@@ -175,6 +221,9 @@ const Home: React.FC = () => {
           </IonContent>
 
         </IonModal>
+        <IonButton expand="block" onClick={atualizar}>
+          Salvar
+        </IonButton>
       </IonContent>
     </IonPage>
   );

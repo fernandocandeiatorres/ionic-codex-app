@@ -24,6 +24,12 @@ export default class User extends BaseModel {
   public age: number
 
   @column()
+  public completos: string
+
+  @column()
+  public todos: string
+
+  @column()
   public rememberMeToken: string | null
 
   @beforeSave()
