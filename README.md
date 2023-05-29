@@ -8,14 +8,14 @@
 
 ## Funcionalidades Implementadas
 
-- [ ] Cadastrar Perfil.   
+- [X] Cadastrar Perfil.   
 - Nome Completo;
 - Gênero;
 - Idade;
 - Email;
 - Senha;   
-- [ ] Entrar no perfil.
-- [ ] Editar Perfil
+- [X] Entrar no perfil.
+- [X] Editar Perfil
 - [X] Adicionar Tarefas.
 - Dia Atual;
 - Dia Futuro;
@@ -40,9 +40,21 @@
   ionic serve
 ```
 
+### Adonis - CLI
+- Iniciando o backend
+```
+  node ace migration:run
+```
+
 ### NodeJS - versão 14 ou posterior.
 - Para verificar a versão instalada, rode:
 ```
    node -v
 ```
+
+## Tela de Login
+![image](https://github.com/fernandocandeiatorres/ionic-codex-app/assets/68764131/41b69a27-a1a5-4469-a1b1-d55cc851df0f)
+
+## Tela inicial
+![image](https://github.com/fernandocandeiatorres/ionic-codex-app/assets/68764131/45e43746-c3ae-494a-af6a-9664fa23ec4a)
 
